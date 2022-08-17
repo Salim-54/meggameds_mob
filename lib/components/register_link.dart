@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meds_future/constants.dart';
+import 'package:meds_future/screens/sign_up/sign_up_screen.dart';
 import 'package:meds_future/size_constants.dart';
 
 class RegisterLink extends StatelessWidget {
@@ -17,9 +18,12 @@ class RegisterLink extends StatelessWidget {
           SizedBox(
             width: getProportionateScreenWidth(10),
           ),
-          Text(
-            "Register",
-            style: TextStyle(color: sPrimaryColor),
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, RegisterScreen.routeName),
+            child: Text(
+              "Register",
+              style: TextStyle(color: sPrimaryColor),
+            ),
           )
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:meds_future/components/register_link.dart';
-import 'package:meds_future/constants.dart';
+import 'package:meds_future/screens/sign_in/components/black_line.dart';
 import 'package:meds_future/screens/sign_in/components/sign_in.dart';
 import 'package:meds_future/size_constants.dart';
 
@@ -81,26 +81,6 @@ class Body extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class BlackLine extends StatelessWidget {
-  const BlackLine({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: getProportionateScreenHeight(55),
-      padding: EdgeInsets.symmetric(vertical: getProportionateScreenHeight(27)),
-      width: getProportionateScreenWidth(70),
-      child: Container(
-        // height: 2,
-        color: Colors.black,
-      ),
-      // color: sPrimaryColor,
     );
   }
 }
