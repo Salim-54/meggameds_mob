@@ -16,6 +16,8 @@
 .idea/
 /web/
 /windows/
+/linux/
+/macos/
 
 
 # The .vscode folder contains launch configuration and tasks you configure in

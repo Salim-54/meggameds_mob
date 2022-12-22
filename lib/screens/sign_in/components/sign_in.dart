@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:meds_future/components/custom_suffix_icon.dart';
 import 'package:meds_future/components/default_button.dart';
 import 'package:meds_future/constants.dart';
 import 'package:meds_future/screens/forget_password/forget_screen.dart';
+import 'package:meds_future/screens/home/home.screen.dart';
 import 'package:meds_future/size_constants.dart';
 
 import '../../../components/form_error.dart';
@@ -30,6 +31,7 @@ class _LogInFormState extends State<LogInForm> {
       _formKey.currentState!.save();
       print("email: " + emailInput);
       print("password: " + passwordInput);
+      Get.to(Home());
     }
   }
 
