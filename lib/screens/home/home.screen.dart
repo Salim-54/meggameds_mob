@@ -2,6 +2,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meds_future/screens/pharmacy/shop/pharmacy.screen.dart';
+import 'package:meds_future/screens/token/token.screen.dart';
 import 'package:meds_future/size_constants.dart';
 
 import '../../constants.dart';
@@ -47,9 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: SearchWidget(),
     ),
     PharmacyScreen(),
-    Container(
-      color: Colors.blue,
-    ),
+    Token(),
   ];
 
   @override
