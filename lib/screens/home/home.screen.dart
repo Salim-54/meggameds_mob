@@ -13,6 +13,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: MyHomePage(),
     );
@@ -44,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> screens = [
     Body(),
     Container(
-      color: Colors.red,
+      color: Colors.grey[300],
       child: SearchWidget(),
     ),
     PharmacyScreen(),
@@ -55,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       // appBar: AppBar(
       //   toolbarHeight: getProportionateScreenHeight(80),
       //   // leading: BackButton(

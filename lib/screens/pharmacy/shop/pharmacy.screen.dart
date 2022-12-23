@@ -27,7 +27,7 @@ class PharmacyScreen extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: Container(
-          color: Color(0xFFEAEAEA),
+          color: Colors.grey[300],
           child: AnimatedBuilder(
               animation: controller,
               builder: (context, _) {

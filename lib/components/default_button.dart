@@ -35,3 +35,41 @@ class DefaulButton extends StatelessWidget {
     );
   }
 }
+
+class MyButton extends StatelessWidget {
+  const MyButton({
+    Key? key,
+    required this.disabled,
+    required this.press,
+    required this.text,
+  }) : super(key: key);
+
+  final bool disabled;
+  final VoidCallback press;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: press,
+      child: Container(
+        padding: const EdgeInsets.all(25),
+        margin: const EdgeInsets.symmetric(horizontal: 25),
+        decoration: BoxDecoration(
+          color: disabled ? sDisabledColor : sPrimaryColor,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

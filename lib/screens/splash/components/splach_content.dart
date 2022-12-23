@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:meds_future/constants.dart';
 import 'package:meds_future/size_constants.dart';
 
@@ -17,30 +18,52 @@ class SplashContent extends StatelessWidget {
       children: [
         Spacer(flex: 2),
         Text(
-          "MEGGAMED",
-          style: TextStyle(
-            color: sPrimaryColor,
-            fontSize: getProportionateScreenHeight(36),
-            fontWeight: FontWeight.bold,
+          "MEGGAMEDS",
+          // style: TextStyle(
+          // color: sPrimaryColor,
+          //   fontSize: getProportionateScreenHeight(36),
+          //   fontWeight: FontWeight.bold,
+          // letterSpacing: 2,
+          // ),
+          style: GoogleFonts.bebasNeue(
             letterSpacing: 2,
+            color: sPrimaryColor,
+            fontSize: 52,
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenHeight(35)),
+          padding: EdgeInsets.only(
+            left: getProportionateScreenHeight(70),
+            right: getProportionateScreenHeight(40),
+          ),
           child: Text(
             text,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
             style: TextStyle(
               wordSpacing: 5,
             ),
           ),
         ),
         Spacer(),
-        Image.asset(
-          image,
-          height: getProportionateScreenHeight(270),
-          width: getProportionateScreenWidth(250),
+        Container(
+          margin: EdgeInsets.only(bottom: 28),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: sThirdColor,
+                offset: Offset(0.0, 0.01),
+                blurRadius: 15.0,
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            child: Image.asset(
+              image,
+              height: getProportionateScreenHeight(270),
+              width: getProportionateScreenWidth(250),
+            ),
+          ),
         )
       ],
     );

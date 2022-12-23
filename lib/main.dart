@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meds_future/routes.dart';
+import 'package:meds_future/screens/auth/pages/register_page.dart';
 import 'package:meds_future/screens/home/home.screen.dart';
 import 'package:meds_future/screens/splash/splash_screen.dart';
 import 'package:meds_future/theme.dart';
+
+import 'screens/auth/pages/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,8 +25,10 @@ class MyApp extends StatelessWidget {
       routes: routes,
 
       getPages: [
-        GetPage(name: '/', page: (() => Home())),
-        GetPage(name: '/home', page: (() => SplashScreen()))
+        GetPage(name: '/home', page: (() => Home())),
+        GetPage(name: '/', page: (() => SplashScreen())),
+        GetPage(name: '/register', page: (() => RegisterPage())),
+        GetPage(name: '/login', page: (() => LoginPage())),
       ],
     );
   }
