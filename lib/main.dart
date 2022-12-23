@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:meds_future/routes.dart';
-import 'package:meds_future/screens/auth/pages/register_page.dart';
-import 'package:meds_future/screens/home/home.screen.dart';
-import 'package:meds_future/screens/splash/splash_screen.dart';
-import 'package:meds_future/theme.dart';
+import './routes.dart';
+import '/screens/auth/pages/register_page.dart';
+import '/screens/home/home.screen.dart';
+import '/screens/splash/splash_screen.dart';
+import './theme.dart';
 
 import 'screens/auth/pages/login_page.dart';
 

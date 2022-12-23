@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meds_future/size_constants.dart';
-
 import '../../../../constants.dart';
+import '../../../../size_constants.dart';
+
 import '../../components/fav_icon.dart';
 import '../../components/price.dart';
 import '../../model/Product.dart';

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:meds_future/constants.dart';
+import '../../../../constants.dart';
 
 import '../../../../controller/search/token.controller.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meds_future/controller/search/token.controller.dart';
-import 'package:meds_future/size_constants.dart';
+import '../../controller/search/token.controller.dart';
+import '../../size_constants.dart';
 
 import '../../constants.dart';
 
@@ -24,7 +24,7 @@ class Settings extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: getProportionateScreenHeight(31.4)),
               child: MyAppBar(
-                title: 'Your Health updates',
+                title: 'Health updates',
                 onSearchTap: () {},
               ),
             ),

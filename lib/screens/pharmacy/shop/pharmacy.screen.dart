@@ -34,7 +34,7 @@ class PharmacyScreen extends StatelessWidget {
                     return Column(
                       children: [
                         MyAppBar(
-                          title: 'unsensitive pharmacy!',
+                          title: 'Hood pharmacy!',
                           onSearchTap: () {},
                         ),
                         Expanded(

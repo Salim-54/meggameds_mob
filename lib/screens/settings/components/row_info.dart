@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meds_future/size_constants.dart';
+import '../../../size_constants.dart';
 
 import '../../../constants.dart';
 
@@ -55,12 +55,15 @@ class RowInfo extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.only(left: 10),
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        value,
-                        style: GoogleFonts.mina(
-                          color: sTextBlackColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                      child: Flexible(
+                        child: Text(
+                          value,
+                          style: GoogleFonts.mina(
+                            color: sTextBlackColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),

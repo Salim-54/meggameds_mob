@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meds_future/constants.dart';
+import '../../../constants.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;

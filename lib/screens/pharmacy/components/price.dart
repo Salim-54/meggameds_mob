@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meds_future/constants.dart';
+import '../../../../constants.dart';
 
 class Price extends StatelessWidget {
   const Price({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:meds_future/constants.dart';
+import '../../../constants.dart';
 
 import '../../home/home.screen.dart';
 import '../components/my_button.dart';

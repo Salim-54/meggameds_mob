@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:meds_future/components/default_button.dart';
-import 'package:meds_future/constants.dart';
-import 'package:meds_future/screens/splash/components/splach_content.dart';
-import 'package:meds_future/size_constants.dart';
+import '../../../components/default_button.dart';
+import '../../../constants.dart';
+import './splach_content.dart';
+import '../../../size_constants.dart';
 
 import '../../auth/pages/login_page.dart';
 

@@ -1,12 +1,10 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:meds_future/screens/pharmacy/shop/pharmacy.screen.dart';
-import 'package:meds_future/screens/token/token.screen.dart';
-import 'package:meds_future/size_constants.dart';
+import '../pharmacy/shop/pharmacy.screen.dart';
+import '../token/token.screen.dart';
+import '../../size_constants.dart';
 
 import '../../constants.dart';
-import '../prescriptons/components/search.dart';
 import '../settings/settings.screen.dart';
 import 'components/body.dart';
 

@@ -37,7 +37,7 @@ class _BodyState extends State<Body> {
           children: [
             // title + search button
             MyAppBar(
-              title: 'Track Our Impressions',
+              title: 'Track Our Moves',
               onSearchTap: searchButtonTapped,
             ),
 
