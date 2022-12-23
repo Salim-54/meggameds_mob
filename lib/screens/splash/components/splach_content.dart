@@ -44,9 +44,10 @@ class SplashContent extends StatelessWidget {
             ),
           ),
         ),
-        Spacer(),
+        // Spacer(),
         Container(
-          margin: EdgeInsets.only(bottom: 28),
+          margin: EdgeInsets.only(
+              bottom: 28, top: getProportionateScreenHeight(18)),
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

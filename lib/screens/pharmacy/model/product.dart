@@ -5,9 +5,9 @@ class Product {
 }
 
 List<Product> demo_products = [
-  Product(title: "Cabbage", image: "assets/images/img_1.png"),
-  Product(title: "Broccoli", image: "assets/images/img_2.png"),
-  Product(title: "Carrot", image: "assets/images/img_3.png"),
-  Product(title: "Pakcoy", image: "assets/images/img_4.png"),
-  Product(title: "Cucumber", image: "assets/images/img_1.png"),
+  Product(title: "Parastamol", image: "assets/images/pil.png"),
+  Product(title: "Biprophene", image: "assets/images/pills.png"),
+  Product(title: "Cold caps", image: "assets/images/med.png"),
+  Product(title: "Kinini", image: "assets/images/meds.png"),
+  Product(title: "Muti", image: "assets/images/other.png"),
 ];

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../../../constants.dart';
+import '../../../size_constants.dart';
 import '../controller/pharma.controller.dart';
 import '../details/details.dart';
 import '../model/Product.dart';
-import 'components/cart_short.dart';
-import 'components/detail_view.dart';
-import 'components/header.dart';
+import 'components/my_app_bar.dart';
 import 'components/product_cart.dart';
 
 class PharmacyScreen extends StatelessWidget {
@@ -23,7 +21,7 @@ class PharmacyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: sThirdColor,
       body: SafeArea(
         bottom: false,
         child: Container(
@@ -33,31 +31,20 @@ class PharmacyScreen extends StatelessWidget {
               builder: (context, _) {
                 return LayoutBuilder(
                   builder: (context, BoxConstraints constraints) {
-                    return Stack(
+                    return Column(
                       children: [
-                        AnimatedPositioned(
-                          duration: panelTransition,
-                          top: controller.homeState == HomeState.normal
-                              ? headerHeight
-                              : -(constraints.maxHeight -
-                                  cartBarHeight * 2 -
-                                  headerHeight),
-                          left: 0,
-                          right: 0,
-                          height: constraints.maxHeight -
-                              headerHeight -
-                              cartBarHeight,
+                        MyAppBar(
+                          title: 'unsensitive pharmacy!',
+                          onSearchTap: () {},
+                        ),
+                        Expanded(
                           child: Container(
+                            // height: getProportionateScreenHeight(600),
                             padding: const EdgeInsets.symmetric(
-                                horizontal: defaultPadding),
+                                horizontal: defaultPadding,
+                                vertical: defaultPadding),
                             decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft:
-                                    Radius.circular(defaultPadding * 1.5),
-                                bottomRight:
-                                    Radius.circular(defaultPadding * 1.5),
-                              ),
+                              color: Colors.grey[300],
                             ),
                             child: GridView.builder(
                               itemCount: demo_products.length,
@@ -96,41 +83,6 @@ class PharmacyScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                        // Card Panel
-                        AnimatedPositioned(
-                          duration: panelTransition,
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          height: controller.homeState == HomeState.normal
-                              ? cartBarHeight
-                              : (constraints.maxHeight - cartBarHeight),
-                          child: GestureDetector(
-                            onVerticalDragUpdate: _onVerticalGesture,
-                            child: Container(
-                              padding: const EdgeInsets.all(defaultPadding),
-                              color: Color(0xFFEAEAEA),
-                              alignment: Alignment.topLeft,
-                              child: AnimatedSwitcher(
-                                duration: panelTransition,
-                                child: controller.homeState == HomeState.normal
-                                    ? CardShortView(controller: controller)
-                                    : CartDetailsView(controller: controller),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Header
-                        AnimatedPositioned(
-                          duration: panelTransition,
-                          top: controller.homeState == HomeState.normal
-                              ? 0
-                              : -headerHeight,
-                          right: 0,
-                          left: 0,
-                          height: headerHeight,
-                          child: HomeHeader(),
                         ),
                       ],
                     );

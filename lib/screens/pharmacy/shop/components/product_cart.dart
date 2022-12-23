@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meds_future/size_constants.dart';
 
 import '../../../../constants.dart';
 import '../../components/fav_icon.dart';
@@ -33,7 +34,9 @@ class ProductCard extends StatelessWidget {
           children: [
             Hero(
               tag: product.title!,
-              child: Image.asset(product.image!),
+              child: Container(
+                  height: getProportionateScreenHeight(150),
+                  child: Image.asset(product.image!)),
             ),
             Text(
               product.title!,
@@ -43,7 +46,7 @@ class ProductCard extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w600),
             ),
             Text(
-              "Fruits",
+              "Pills",
               style: Theme.of(context).textTheme.caption,
             ),
             Row(

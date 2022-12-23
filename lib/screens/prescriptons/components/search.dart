@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+
+import '../../../controller/search/token.controller.dart';
 
 class SearchWidget extends StatefulWidget {
   const SearchWidget({Key? key}) : super(key: key);
@@ -10,6 +13,8 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget>
     with SingleTickerProviderStateMixin {
+  TokenController token_search = Get.put(TokenController());
+
   late AnimationController _animationController;
   late Animation<Offset> _offsetAnimation;
   late Animation<double> _containerWidth;
@@ -20,7 +25,7 @@ class _SearchWidgetState extends State<SearchWidget>
 
   bool _showTopContainer = false;
   bool _showTrailingIcon = false;
-  bool _showSearchResult = false;
+
   bool _showTextInputResult = false;
 
   bool _expaned = false;
@@ -86,6 +91,7 @@ class _SearchWidgetState extends State<SearchWidget>
         });
       }
     });
+    _animationController.forward();
   }
 
   @override
@@ -151,7 +157,7 @@ class _SearchWidgetState extends State<SearchWidget>
                         color: Colors.white,
                       ),
                       width: 500,
-                      height: _showSearchResult ? 300 : 80,
+                      height: 80,
                       child: Column(
                         children: [
                           Row(
@@ -183,17 +189,7 @@ class _SearchWidgetState extends State<SearchWidget>
                                       color: Colors.black.withOpacity(0.4),
                                     ),
                                   ),
-                                  onChanged: (value) {
-                                    if (value.isNotEmpty) {
-                                      setState(() {
-                                        _showSearchResult = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        _showSearchResult = false;
-                                      });
-                                    }
-                                  },
+                                  onChanged: (value) {},
                                 ),
                               ),
                               GestureDetector(
@@ -201,7 +197,6 @@ class _SearchWidgetState extends State<SearchWidget>
                                   if (_textEditingController.text.isNotEmpty) {
                                     setState(() {
                                       _textEditingController.clear();
-                                      _showSearchResult = false;
                                     });
                                   } else {
                                     setState(() {
@@ -222,48 +217,6 @@ class _SearchWidgetState extends State<SearchWidget>
                               ),
                             ],
                           ),
-                          Expanded(
-                            child: Visibility(
-                              visible: _showSearchResult,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Divider(
-                                      indent: 16.0,
-                                      endIndent: 16.0,
-                                      height: 3.0,
-                                      color: Colors.black.withOpacity(0.5),
-                                    ),
-                                    ListTile(
-                                      leading: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Icon(FontAwesomeIcons.instagram),
-                                      ),
-                                      title: Text('watery_desert'),
-                                      subtitle: Text('Follow me on instagram'),
-                                    ),
-                                    ListTile(
-                                      leading: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Icon(FontAwesomeIcons.twitter),
-                                      ),
-                                      title: Text('watery_desert'),
-                                      subtitle: Text('Follow me on twitter'),
-                                    ),
-                                    ListTile(
-                                      leading: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Icon(FontAwesomeIcons.github),
-                                      ),
-                                      title: Text('watery-desert'),
-                                      subtitle: Text(
-                                          'Follow me and give me star on github'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          )
                         ],
                       ),
                     )

@@ -7,6 +7,7 @@ import 'package:meds_future/size_constants.dart';
 
 import '../../constants.dart';
 import '../prescriptons/components/search.dart';
+import '../settings/settings.screen.dart';
 import 'components/body.dart';
 
 class Home extends StatelessWidget {
@@ -44,12 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> screens = [
     Body(),
-    Container(
-      color: Colors.grey[300],
-      child: SearchWidget(),
-    ),
     PharmacyScreen(),
     Token(),
+    Settings(),
   ];
 
   @override
@@ -119,22 +117,22 @@ class _MyHomePageState extends State<MyHomePage> {
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.people),
-            title: Text('Users'),
+            icon: Icon(Icons.local_pharmacy_rounded),
+            title: Text('Pharmacy'),
             activeColor: sPrimaryColor,
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.message),
+            icon: Icon(Icons.youtube_searched_for_rounded),
             title: Text(
-              'Messages test for mes teset test test ',
+              'Token find',
             ),
             activeColor: sPrimaryColor,
             textAlign: TextAlign.center,
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.settings),
-            title: Text('Settings'),
+            icon: Icon(Icons.health_and_safety_rounded),
+            title: Text('Health status'),
             activeColor: sPrimaryColor,
             textAlign: TextAlign.center,
           ),

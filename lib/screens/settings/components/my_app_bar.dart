@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:meds_future/constants.dart';
 
 import '../../../controller/search/token.controller.dart';
 
@@ -29,7 +28,7 @@ class MyAppBar extends StatelessWidget {
               title,
               style: GoogleFonts.bebasNeue(
                 fontSize: 52,
-                color: sPrimaryColor,
+                color: Colors.grey[300],
               ),
             ),
           ),
@@ -42,13 +41,11 @@ class MyAppBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 color: Colors.grey[200],
               ),
-              child: Obx(() => Icon(
-                    token_controller.expand.value
-                        ? Icons.search
-                        : Icons.close_rounded,
-                    size: 36,
-                    color: Colors.grey[800],
-                  )),
+              child: Icon(
+                Icons.health_and_safety,
+                size: 36,
+                color: Colors.grey[800],
+              ),
             ),
           ),
         ],

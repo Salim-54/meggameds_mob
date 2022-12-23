@@ -1,5 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:meds_future/constants.dart';
 
 class MyAppBar extends StatelessWidget {
   final String title;
@@ -22,6 +23,7 @@ class MyAppBar extends StatelessWidget {
             child: Text(
               title,
               style: GoogleFonts.bebasNeue(
+                color: sPrimaryColor,
                 fontSize: 52,
               ),
             ),
@@ -36,9 +38,9 @@ class MyAppBar extends StatelessWidget {
                 color: Colors.grey[200],
               ),
               child: Icon(
-                Icons.search,
+                Icons.track_changes,
                 size: 36,
-                color: Colors.grey[800],
+                color: sPrimaryColor,
               ),
             ),
           ),

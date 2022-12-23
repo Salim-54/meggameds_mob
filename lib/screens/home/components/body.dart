@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../size_constants.dart';
 import 'my_app_bar.dart';
 import 'my_tab.dart';
 import 'tabs/recent.dart';
@@ -42,7 +43,7 @@ class _BodyState extends State<Body> {
 
             // tab bar
             SizedBox(
-              height: 600,
+              height: getProportionateScreenHeight(541.5),
               child: MyTabBar(
                 tabOptions: tabOption,
               ),
