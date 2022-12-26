@@ -55,16 +55,14 @@ class RowInfo extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.only(left: 10),
                       alignment: Alignment.centerLeft,
-                      child: Flexible(
-                        child: Text(
-                          value,
-                          style: GoogleFonts.mina(
-                            color: sTextBlackColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          overflow: TextOverflow.ellipsis,
+                      child: Text(
+                        value,
+                        style: GoogleFonts.mina(
+                          color: sTextBlackColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ),

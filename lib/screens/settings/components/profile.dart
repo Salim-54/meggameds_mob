@@ -58,7 +58,7 @@ class Profile extends StatelessWidget {
                       ),
                       RowInfo(
                         key_s: "ID",
-                        value: "11 9998 00355 35800",
+                        value: "11 9998 00355 35800dddddddd",
                       ),
                       RowInfo(
                         key_s: "Tel",
