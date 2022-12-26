@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meds_future/constants.dart';
-import 'package:meds_future/size_constants.dart';
+import '../../constants.dart';
+import '../../size_constants.dart';
 
 class RegisterLink extends StatelessWidget {
   const RegisterLink({

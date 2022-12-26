@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:meds_future/constants.dart';
-import 'package:meds_future/size_constants.dart';
+import '../../constants.dart';
+import '../../size_constants.dart';
 
 class FormError extends StatelessWidget {
   const FormError({

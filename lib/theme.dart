@@ -30,8 +30,9 @@ InputDecorationTheme inputDecorationTheme() {
 
 TextTheme themeText() {
   return TextTheme(
-      bodyText1: TextStyle(color: sTextBlackColor),
-      bodyText2: TextStyle(color: sTextGreyColor));
+    bodyText1: TextStyle(color: sTextBlackColor),
+    bodyText2: TextStyle(color: sTextGreyColor),
+  );
 }
 
 AppBarTheme appBarTheme() {
