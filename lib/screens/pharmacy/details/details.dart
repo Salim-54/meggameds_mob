@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../components/fav_icon.dart';
 import '../components/price.dart';
-import '../model/Product.dart';
+import '../model/product.dart';
 import 'components/cart_counter.dart';
 
 class DetailsScreen extends StatefulWidget {

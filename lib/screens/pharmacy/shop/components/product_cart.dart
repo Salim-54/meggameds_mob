@@ -4,7 +4,7 @@ import '../../../../size_constants.dart';
 
 import '../../components/fav_icon.dart';
 import '../../components/price.dart';
-import '../../model/Product.dart';
+import '../../model/product.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({

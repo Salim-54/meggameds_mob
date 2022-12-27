@@ -3,7 +3,8 @@ import '../../../constants.dart';
 import '../../../size_constants.dart';
 import '../controller/pharma.controller.dart';
 import '../details/details.dart';
-import '../model/Product.dart';
+
+import '../model/product.dart';
 import 'components/my_app_bar.dart';
 import 'components/product_cart.dart';
 

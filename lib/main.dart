@@ -1,11 +1,15 @@
+import 'package:MMEDES/utils/constants.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import './routes.dart';
 import '/screens/auth/pages/register_page.dart';
 import '/screens/home/home.screen.dart';
 import '/screens/splash/splash_screen.dart';
 import './theme.dart';
 
+import 'providers/authentication.dart';
 import 'screens/auth/pages/login_page.dart';
 
 void main() {
@@ -15,7 +19,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
+  @override
   Widget build(BuildContext context) {
+    // Dio dio = Dio();
+    // dio.options.baseUrl = Constants.BASE_URL;
+
+    // SizeConfig().init(context);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
