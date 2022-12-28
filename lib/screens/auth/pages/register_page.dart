@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../../constants.dart';
 
+import '../../../controller/register.controller.dart';
 import '../../../providers/authentication.dart';
 import '../../../utils/http_exceptions.dart';
 import '../../../utils/snack_bar.dart';
@@ -22,6 +23,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  EnterController credentials = Get.put(EnterController());
+
   // text editing controllers
   final emailController = TextEditingController();
   final firstNameController = TextEditingController();
@@ -31,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final confirmPasswordController = TextEditingController();
 
   // sign user up method
-  Future<void> signUserUp() async {
+  void signUserUp() async {
     // show loading circle
 
     // await Future.delayed(Duration(seconds: 3));
@@ -49,13 +52,6 @@ class _RegisterPageState extends State<RegisterPage> {
         firstNameController.text.isNotEmpty &&
         lastNameController.text.isNotEmpty &&
         GetUtils.isPhoneNumber(phoneController.text)) {
-      var data = {
-        "email": emailController.text,
-        "password": passwordController.text,
-        "firstName": firstNameController.text,
-        "lastName": lastNameController.text,
-        "phone": "25" + phoneController.text
-      };
       try {
         showDialog(
           context: context,
@@ -65,83 +61,38 @@ class _RegisterPageState extends State<RegisterPage> {
             );
           },
         );
-        // await Provider.of<AuthProvider>(
-        //   context,
-        //   listen: false,
-        // ).register(
-        //   firstNameController.text,
-        //   lastNameController.text,
-        //   emailController.text,
-        //   phoneController.text,
-        //   passwordController.text,
-        // );
-        // print("Registered");
-
-        // Dio dio = Dio();
-
-        // // Create the request options
-        // Options options = Options(
-        //   headers: {"Content-Type": "application/json"},
-        // );
-        // var response = await Dio().get('http://3.91.178.169/api/v1/medicines');
-        // print(response.data['data']['medicines'][0]);
-
-        // Create the request body
-        Map<String, dynamic> body = {
-          "email": emailController.text,
-          "password": passwordController.text,
-          "firstName": firstNameController.text,
-          "lastName": lastNameController.text,
-          "phone": "25" + phoneController.text,
-        };
-        var response = await Dio().post(
-          'http://3.91.178.169/auth/signup',
-          data: {
-            "email": emailController.text,
-            "password": passwordController.text,
-            "firstName": firstNameController.text,
-            "lastName": lastNameController.text,
-            "phone": "25" + phoneController.text,
-          },
+        var result = await Provider.of<AuthProvider>(
+          context,
+          listen: false,
+        ).register(
+          firstNameController.text,
+          lastNameController.text,
+          emailController.text,
+          phoneController.text,
+          passwordController.text,
         );
-        // ignore: unnecessary_null_comparison
+        print(result);
+        credentials.email.value = result['email'];
+        credentials.l_name.value = result['lastName'];
+        credentials.phone.value = result['phone'];
+        credentials.f_name.value = result['firstName'];
+        credentials.id.value = result['_id'];
+        credentials.token.value = result['token'];
+        navigator?.pop(context);
+        snackDirect(context,
+            "You are welcome ${result['firstName']} ${result['lastName']} SignUp was successful!");
+        await Future.delayed(Duration(milliseconds: 1300));
 
-        print(response);
-
-        // // Make a POST request to a URL
-        // final response = await dio.post("http://3.91.178.169/auth/signup",
-        //     data: body, options: options);
-
-        // // Print the response body
-        // print(response.data + '+++++++++++++++++++++++++++++++');
-        // print('Registered');
-
-        // Navigator.of(context).pushAndRemoveUntil(
-        //   MaterialPageRoute(
-        //     builder: (BuildContext context) => Home(),
-        //   ),
-        //   ModalRoute.withName("/home"),
-        // // );
-        Navigator.pop(context);
+        Get.to(Home());
       } on DioError catch (e) {
-        Navigator.pop(context);
-        print(e.response!.statusCode);
-
-        print(e.response?.data['message']);
-        if (e.response!.statusCode == 400) {
-          showSnackbar(context, e.response?.data['message'], type: "failed");
-        }
         // Check the type of the error
-        // if (e.type == DioErrorType.response) {
-        //   // A 400 error occurred
-        //   if (e.response!.statusCode == 400) {
-        //     // Handle the error here
-        //   }
-        // }
+        showSnackbar(context, e.response?.data['message'], type: "failed");
       } on CustomHttpException catch (e) {
         showSnackbar(context, e.message, type: "failed");
         Navigator.pop(context);
-      } catch (e) {}
+      } catch (e) {
+        print(e);
+      }
       // print(data);
     } else if (GetUtils.isPhoneNumber(phoneController.text) == false ||
         phoneController.text.length != 10 ||

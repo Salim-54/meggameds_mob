@@ -12,3 +12,20 @@ void showSnackbar(BuildContext context, String message, {type = "success"}) {
 
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
+
+void snackDirect(
+  BuildContext context,
+  String message,
+) {
+  var snackBar = SnackBar(
+    duration: Duration(seconds: 1),
+    dismissDirection: DismissDirection.up,
+    content: Text(
+      "$message",
+      style: TextStyle(color: sWhite),
+    ),
+    backgroundColor: sThirdColor,
+  );
+
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}

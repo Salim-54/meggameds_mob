@@ -1,8 +1,13 @@
+import 'package:MMEDES/controller/register.controller.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import '../../../constants.dart';
+import '../../../providers/authentication.dart';
 import '../../../size_constants.dart';
 
+import '../../../utils/http_exceptions.dart';
 import '../../../utils/snack_bar.dart';
 import '../../home/home.screen.dart';
 import '../components/my_button.dart';
@@ -11,6 +16,8 @@ import '../components/square_tile.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
+  static String routeName = "/loginuser";
+
   const LoginPage({key});
 
   @override
@@ -18,6 +25,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  EnterController credentials = Get.put(EnterController());
   final _formKey = GlobalKey<FormState>();
   // text editing controllers
   final emailController = TextEditingController();
@@ -50,7 +58,48 @@ class _LoginPageState extends State<LoginPage> {
         "email": emailController.text,
         "password": passwordController.text,
       };
+
       print(data);
+
+      try {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        );
+        var result = await Provider.of<AuthProvider>(
+          context,
+          listen: false,
+        ).login(
+          emailController.text,
+          passwordController.text,
+        );
+        print(result['email']);
+        credentials.email.value = result['email'];
+        credentials.l_name.value = result['lastName'];
+        credentials.phone.value = result['phone'];
+        credentials.f_name.value = result['firstName'];
+        credentials.id.value = result['_id'];
+        credentials.token.value = result['token'];
+
+        navigator?.pop(context);
+        snackDirect(context,
+            "You are welcome ${result['firstName']} ${result['lastName']} SignUp was successful!");
+        await Future.delayed(Duration(milliseconds: 1300));
+
+        Get.to(Home());
+      } on DioError catch (e) {
+        // Check the type of the error
+        showSnackbar(context, e.response?.data['message'], type: "failed");
+      } on CustomHttpException catch (e) {
+        showSnackbar(context, e.message, type: "failed");
+        Navigator.pop(context);
+      } catch (e) {
+        print(e);
+      }
     } else if (emailController.text.isEmpty) {
       showSnackbar(context, "you have to provide email!", type: "failed");
     } else if (GetUtils.isEmail(emailController.text) == false) {

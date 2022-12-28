@@ -3,8 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../size_constants.dart';
 
 import '../../../constants.dart';
+import 'row_history.dart';
 import 'row_medical.dart';
 
+// Container(
+//   height: getProportionateScreenHeight(225),
+//   color: sOtherBg,
+//   child: SingleChildScrollView(
+//     child: Column(
+//       children: [],
+//     ),
+//   ),
+// )
+//
 class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,34 +47,19 @@ class History extends StatelessWidget {
               horizontal: defaultPadding,
               vertical: 5,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "No history yet",
-                  style: GoogleFonts.mina(
-                    color: sTextBlackColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                )
-                // RowMed(
-                //   key_s: "Height",
-                //   day: "3 days ago",
-                //   value: "45",
-                // ),
-                // RowMed(
-                //   key_s: "Blood pressure",
-                //   day: "3 days ago",
-                //   value: "23",
-                // ),
-                // RowMed(
-                //   key_s: "Temperature",
-                //   day: "3 days ago",
-                //   value: "23",
-                // ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  RowHistory(
+                      token: '55544', type: 'generic', place: 1, paid: true),
+                  RowHistory(
+                      token: '55544', type: 'generic', place: 1, paid: false),
+                  RowHistory(
+                      token: '55544', type: 'sensitive', place: 1, paid: false),
+                ],
+              ),
             ),
           ),
         ),
