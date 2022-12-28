@@ -13,6 +13,7 @@ import './theme.dart';
 import 'providers/authentication.dart';
 import 'providers/medicine.dart';
 import 'providers/start_transaction.dart';
+import 'providers/payment_history.dart';
 import 'screens/auth/pages/login_page.dart';
 
 void main() {
@@ -27,11 +28,12 @@ class MyApp extends StatelessWidget {
     Dio dio = Dio();
     dio.options.baseUrl = Constants.BASE_URL;
 
-    // SizeConfig().init(context);
+    // SizeConfig().init(context);Transactions
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider(dio)),
         ChangeNotifierProvider(create: (_) => StartTransaction(dio)),
+        ChangeNotifierProvider(create: (_) => Transactions(dio)),
         ChangeNotifierProvider(create: (_) => ProductsProvider(dio)),
       ],
       child: GetMaterialApp(
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/home', page: (() => Home())),
           GetPage(name: '/', page: (() => SplashScreenNew())),
           GetPage(name: '/kafka', page: (() => SplashScreen())),
+          GetPage(name: '/register', page: (() => RegisterPage())),
           GetPage(name: '/register', page: (() => RegisterPage())),
           GetPage(name: '/login', page: (() => LoginPage())),
         ],

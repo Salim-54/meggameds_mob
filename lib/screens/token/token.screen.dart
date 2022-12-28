@@ -8,6 +8,7 @@ import '../../constants.dart';
 // import '../prescriptons/components/search.dart';
 import '../prescriptons/components/search.dart';
 import 'components/my_app_bar.dart';
+import 'components/result.dart';
 
 class Token extends StatelessWidget {
   TokenController expand_search = Get.put(TokenController());
@@ -43,7 +44,8 @@ class Token extends StatelessWidget {
                           style: GoogleFonts.mina(color: sWhite, fontSize: 20),
                         ),
                       ),
-                    )
+                    ),
+                    PrescriptionWidget(),
                   ],
                 ),
                 color: sThirdColor,

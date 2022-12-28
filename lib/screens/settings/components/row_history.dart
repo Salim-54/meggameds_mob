@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:MMEDES/screens/settings/model/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../size_constants.dart';
@@ -9,25 +10,24 @@ import '../../../constants.dart';
 class RowHistory extends StatelessWidget {
   RowHistory({
     Key? key,
-    required this.token,
-    required this.type,
-    required this.paid,
-    required this.place,
+    required this.payment,
+    required this.press,
+    required this.index,
   }) : super(key: key);
-  final String token;
-  final int place;
-  final String type;
-  final bool paid;
+  final Payment payment;
+  final VoidCallback press;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: Key(payment.id),
       child: Column(
         children: [
           Row(
             children: [
               Text(
-                '${place}.  ',
+                '${index + 1}.  ',
                 style: GoogleFonts.mina(
                   color: sTextBlackColor,
                   fontSize: 14,
@@ -42,7 +42,7 @@ class RowHistory extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          token,
+                          payment.token.toString(),
                           style: GoogleFonts.mina(
                             color: sTextBlackColor,
                             fontSize: 14,
@@ -51,7 +51,7 @@ class RowHistory extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        type,
+                        payment.type,
                         style: GoogleFonts.mina(
                           color: sTextBlackColor,
                           fontSize: 14,
@@ -68,9 +68,11 @@ class RowHistory extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                   alignment: Alignment.center,
                   child: Text(
-                    paid ? 'paid' : 'not-paid',
+                    payment.payment,
                     style: GoogleFonts.mina(
-                      color: paid ? sSuccessColor : sTextBlackColor,
+                      color: payment.payment == 'paid'
+                          ? sSuccessColor
+                          : sTextBlackColor,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
@@ -83,12 +85,14 @@ class RowHistory extends StatelessWidget {
                     padding: EdgeInsets.only(left: 10),
                     alignment: Alignment.center,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: payment.payment == 'paid' ? () {} : press,
                       child: Container(
                         height: getProportionateScreenHeight(25),
                         width: getProportionateScreenWidth(80),
                         decoration: BoxDecoration(
-                          color: paid ? sTextGreyColor : sPrimaryColor,
+                          color: payment.payment != 'paid'
+                              ? sTextGreyColor
+                              : sPrimaryColor,
                           borderRadius: BorderRadius.all(
                             Radius.circular(8),
                           ),
