@@ -1,5 +1,8 @@
-import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import '../../controller/search/token.controller.dart';
 import '../pharmacy/shop/pharmacy.screen.dart';
 import '../token/token.screen.dart';
 import '../../size_constants.dart';
@@ -9,6 +12,8 @@ import '../settings/settings.screen.dart';
 import 'components/body.dart';
 
 class Home extends StatelessWidget {
+  static String routeName = "/hooem";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,8 +32,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
-  PageController _pageController = PageController();
+  TokenController token = Get.put(TokenController());
 
+  PageController _pageController = PageController();
   @override
   void initState() {
     super.initState();

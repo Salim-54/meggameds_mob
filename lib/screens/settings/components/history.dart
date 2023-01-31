@@ -1,11 +1,50 @@
+import 'package:MMEDES/providers/payment_history.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../../../size_constants.dart';
 
 import '../../../constants.dart';
+import '../model/payment.dart';
+import 'row_history.dart';
 import 'row_medical.dart';
+import 'skeleton.dart';
 
-class History extends StatelessWidget {
+class History extends StatefulWidget {
+  @override
+  State<History> createState() => _HistoryState();
+}
+
+class _HistoryState extends State<History> {
+  List<Payment> _items = [];
+
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void fetchData() async {
+    try {
+      await Provider.of<Transactions>(context, listen: false).fetchSave();
+      setState(() {
+        _items = Provider.of<Transactions>(context, listen: false).items;
+        print(_items);
+
+        _loading = false;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,37 +73,20 @@ class History extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: defaultPadding,
-              vertical: 5,
+              // vertical: 5,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "No history yet",
-                  style: GoogleFonts.mina(
-                    color: sTextBlackColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
+            // child: ListSkeleton(),
+            child: _loading
+                ? ListSkeleton()
+                : ListView.builder(
+                    itemCount: _items.length,
+                    itemBuilder: (context, index) => RowHistory(
+                        payment: _items[index],
+                        press: () {
+                          // print()
+                        },
+                        index: index),
                   ),
-                )
-                // RowMed(
-                //   key_s: "Height",
-                //   day: "3 days ago",
-                //   value: "45",
-                // ),
-                // RowMed(
-                //   key_s: "Blood pressure",
-                //   day: "3 days ago",
-                //   value: "23",
-                // ),
-                // RowMed(
-                //   key_s: "Temperature",
-                //   day: "3 days ago",
-                //   value: "23",
-                // ),
-              ],
-            ),
           ),
         ),
       ],

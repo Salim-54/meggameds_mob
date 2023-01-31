@@ -1,13 +1,29 @@
 class Product {
-  final String? title, image;
+  String id;
+  String medName;
+  String medComment;
+  String medNumber;
+  String medPrice;
 
-  Product({this.title, this.image});
+  String medPicture;
+
+  Product({
+    required this.id,
+    required this.medName,
+    required this.medComment,
+    required this.medNumber,
+    required this.medPrice,
+    required this.medPicture,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['_id'].toString(),
+      medName: json['medName'],
+      medComment: json['medComment'],
+      medNumber: json['medNumber'].toString(),
+      medPrice: json['medPrice'].toString(),
+      medPicture: json['medPicture'],
+    );
+  }
 }
-
-List<Product> demo_products = [
-  Product(title: "Parastamol", image: "assets/images/pil.png"),
-  Product(title: "Biprophene", image: "assets/images/pills.png"),
-  Product(title: "Cold caps", image: "assets/images/med.png"),
-  Product(title: "Kinini", image: "assets/images/meds.png"),
-  Product(title: "Muti", image: "assets/images/other.png"),
-];

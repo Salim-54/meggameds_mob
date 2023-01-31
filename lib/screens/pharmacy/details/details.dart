@@ -1,9 +1,17 @@
+import 'package:MMEDES/components/default_button.dart';
+import 'package:MMEDES/providers/start_transaction.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants.dart';
+import '../../../utils/http_exceptions.dart';
+import '../../../utils/snack_bar.dart';
 import '../components/fav_icon.dart';
 import '../components/price.dart';
-import '../model/Product.dart';
+import '../model/product.dart';
 import 'components/cart_counter.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -19,28 +27,43 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  String _cartTag = "";
+  void startTransaction() async {
+    try {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+      var result = await Provider.of<StartTransaction>(
+        context,
+        listen: false,
+      ).transaction(widget.product.id);
+
+      // print(result);
+
+      navigator?.pop(context);
+      snackDirect(context, "Your transaction has been started!");
+      await Future.delayed(Duration(milliseconds: 1300));
+
+      // navigator!.pop(context);
+      Navigator.pop(context);
+    } on DioError catch (e) {
+      // Check the type of the error
+      showSnackbar(context, e.response?.data['message'], type: "failed");
+    } on CustomHttpException catch (e) {
+      showSnackbar(context, e.message, type: "failed");
+      Navigator.pop(context);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: SafeArea(
-        child: SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-            child: ElevatedButton(
-              onPressed: () {
-                widget.onProductAdd();
-                setState(() {
-                  _cartTag = '_cartTag';
-                });
-                Navigator.pop(context);
-              },
-              child: Text("Add to Cart"),
-            ),
-          ),
-        ),
-      ),
       backgroundColor: Colors.white,
       appBar: buildAppBar(),
       body: Column(
@@ -55,8 +78,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   width: double.infinity,
                   color: Color(0xFFF8F8F8),
                   child: Hero(
-                    tag: widget.product.title! + _cartTag,
-                    child: Image.asset(widget.product.image!),
+                    tag: widget.product.id,
+                    child: Image.network(widget.product.medPicture),
                   ),
                 ),
                 Positioned(
@@ -73,24 +96,50 @@ class _DetailsScreenState extends State<DetailsScreen> {
               children: [
                 Expanded(
                   child: Text(
-                    widget.product.title!,
+                    widget.product.medName,
                     style: Theme.of(context)
                         .textTheme
                         .headline6!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Price(amount: "20.00"),
+                Price(amount: widget.product.medPrice),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(defaultPadding),
-            child: Text(
-              "Cabbage (comprising several cultivars of Brassica oleracea) is a leafy green, red (purple), or white (pale green) biennial plant grown as an annual vegetable crop for its dense-leaved heads. It is descended from the wild cabbage (B. oleracea var. oleracea), and belongs to the cole crops or brassicas, meaning it is closely related to broccoli and cauliflower (var. botrytis); Brussels sprouts (var. gemmifera); and Savoy cabbage (var. sabauda).",
-              style: TextStyle(
-                color: Color(0xFFBDBDBD),
-                height: 1.8,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: defaultPadding, vertical: defaultPadding),
+              child: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(defaultPadding),
+                      child: Text(
+                        widget.product.medComment,
+                        style: TextStyle(
+                          color: Color(0xFFBDBDBD),
+                          height: 1.8,
+                        ),
+                      ),
+                    ),
+                    DefaulButton(
+                        disabled: false,
+                        press: startTransaction,
+                        // press: () async {
+                        //   final prefs = await SharedPreferences.getInstance();
+                        //   final extractedToken = prefs.getString("token");
+                        //   print(extractedToken);
+                        //   print(widget.product.id);
+                        //   Navigator.pop(context);
+                        // },
+                        text: 'Buy this med'),
+                  ],
+                ),
               ),
             ),
           ),
@@ -108,7 +157,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       elevation: 0,
       centerTitle: true,
       title: Text(
-        "Fruits",
+        widget.product.medName,
         style: TextStyle(color: Colors.black),
       ),
       actions: [

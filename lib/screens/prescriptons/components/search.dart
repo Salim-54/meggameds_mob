@@ -175,8 +175,12 @@ class _SearchWidgetState extends State<SearchWidget>
                               ),
                               Expanded(
                                 child: TextField(
+                                  keyboardType: TextInputType.number,
                                   controller: _textEditingController,
                                   autofocus: true,
+                                  onSubmitted: (value) {
+                                    print(value);
+                                  },
                                   style: TextStyle(
                                     fontSize: 20,
                                     // color: Colors.black.withOpacity(0.4),

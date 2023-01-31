@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../constants.dart';
+import '../../../providers/medicine.dart';
 import '../../../size_constants.dart';
+import '../components/empty_container.dart';
+import '../components/skeleton.dart';
 import '../controller/pharma.controller.dart';
 import '../details/details.dart';
-import '../model/Product.dart';
+
+import '../model/product.dart';
+import 'components/meds_list.dart';
 import 'components/my_app_bar.dart';
 import 'components/product_cart.dart';
 
 class PharmacyScreen extends StatelessWidget {
   final controller = HomeController();
 
-  void _onVerticalGesture(DragUpdateDetails details) {
-    if (details.primaryDelta! < -0.7) {
-      controller.changeHomeState(HomeState.cart);
-    } else if (details.primaryDelta! > 12) {
-      controller.changeHomeState(HomeState.normal);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    List<Product> _items =
+        Provider.of<ProductsProvider>(context, listen: false).items;
+
     return Scaffold(
       backgroundColor: sThirdColor,
       body: SafeArea(
@@ -34,55 +35,13 @@ class PharmacyScreen extends StatelessWidget {
                     return Column(
                       children: [
                         MyAppBar(
-                          title: 'Hood pharmacy!',
+                          title: 'Hood pharmacy',
                           onSearchTap: () {},
                         ),
                         Expanded(
-                          child: Container(
-                            // height: getProportionateScreenHeight(600),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: defaultPadding,
-                                vertical: defaultPadding),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                            ),
-                            child: GridView.builder(
-                              itemCount: demo_products.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 0.75,
-                                mainAxisSpacing: defaultPadding,
-                                crossAxisSpacing: defaultPadding,
-                              ),
-                              itemBuilder: (context, index) => ProductCard(
-                                product: demo_products[index],
-                                press: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      transitionDuration:
-                                          const Duration(milliseconds: 500),
-                                      reverseTransitionDuration:
-                                          const Duration(milliseconds: 500),
-                                      pageBuilder: (context, animation,
-                                              secondaryAnimation) =>
-                                          FadeTransition(
-                                        opacity: animation,
-                                        child: DetailsScreen(
-                                          product: demo_products[index],
-                                          onProductAdd: () {
-                                            controller.addProductToCart(
-                                                demo_products[index]);
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
+                          // child: ListSkleton(),
+                          child:
+                              MedsList(items: _items, controller: controller),
                         ),
                       ],
                     );

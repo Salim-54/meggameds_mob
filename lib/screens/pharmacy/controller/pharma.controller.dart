@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../model/Product.dart';
+import '../model/product.dart';
 import '../model/product_item.dart';
 
 enum HomeState { normal, cart }
@@ -17,7 +16,7 @@ class HomeController extends ChangeNotifier {
 
   void addProductToCart(Product product) {
     for (ProductItem item in cart) {
-      if (item.product!.title == product.title) {
+      if (item.product!.medName == product.medName) {
         item.increment();
         notifyListeners();
         return;

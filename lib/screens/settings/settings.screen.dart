@@ -51,6 +51,9 @@ class Settings extends StatelessWidget {
                               Profile(),
                               Medical(),
                               History(),
+
+                              // Medical(),
+                              // History(),
                             ],
                           ),
                         ),

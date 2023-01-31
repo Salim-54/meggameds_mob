@@ -4,7 +4,7 @@ import '../../../../size_constants.dart';
 
 import '../../components/fav_icon.dart';
 import '../../components/price.dart';
-import '../../model/Product.dart';
+import '../../model/product.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -33,26 +33,30 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: product.title!,
+              tag: product.id,
               child: Container(
-                  height: getProportionateScreenHeight(150),
-                  child: Image.asset(product.image!)),
+                height: getProportionateScreenHeight(150),
+                child: FadeInImage(
+                  image: NetworkImage(product.medPicture),
+                  placeholder: AssetImage('assets/images/med.png'),
+                ),
+              ),
             ),
             Text(
-              product.title!,
+              product.medName,
               style: Theme.of(context)
                   .textTheme
                   .subtitle1!
                   .copyWith(fontWeight: FontWeight.w600),
             ),
             Text(
-              "Pills",
+              'Generic',
               style: Theme.of(context).textTheme.caption,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Price(amount: "20.00"),
+                Price(amount: product.medPrice),
                 FavBtn(),
               ],
             )
